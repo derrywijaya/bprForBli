@@ -16,7 +16,7 @@ Citation:
 
 ## Requirements:
 
-java, maven, tensorflow, numpy, math, sklearn
+java, maven, tensorflow, numpy, math, sklearn, sed
 
 ## Instructions:
 1. Download [bprForBli.tar.xz](https://www.seas.upenn.edu/~derry/bprForBli.tar.xz) and unzip it
@@ -58,4 +58,4 @@ model.wv.save_word2vec_format(fileoutname)
 ```
 MAVEN_OPTS="-Xmx200G" mvn exec:java -Dexec.mainClass=librec.main.LibRec -Dexec.args="-c multi/config/BPR-$lang.conf"
 ```
-2. If you encounter problem, try running the commands in run.sh line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., sed) in run.sh to run differently. 
+2. If you encounter problem, try running the commands in run.sh line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., `sed`) in run.sh to run differently. 
