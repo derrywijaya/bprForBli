@@ -20,8 +20,8 @@ java, maven, tensorflow, numpy, math, sklearn, sed
 
 ## Instructions:
 1. Download [bprForBli.tar.xz](https://www.seas.upenn.edu/~derry/bprForBli.tar.xz) and unzip it
-2. Change directory (cd) to librec directory
-3. Install happy coding:
+2. Change directory `cd` to librec directory
+3. Install `happy coding`:
 ```
 mvn install:install-file -Dfile=lib/happy.coding.utils-1.2.5.jar -DgroupId=happy.coding -DartifactId=utils -Dversion=1.2.5 -Dpackaging=jar
 ```
@@ -35,7 +35,7 @@ mvn clean install
 * Bilingual dictionary, in JSON format, all lower cased e.g., [ko.json](https://www.seas.upenn.edu/~derry/ko.json)
 * List of foreign words to be translated, one word per line, all lower-cased e.g., [ko.words](https://www.seas.upenn.edu/~derry/ko.words)
 
-To generate the embedding files (\*.vec) for a new language, you can use Gensim: (where filename is the file containing tokenized and lower-cased English/foreign language text)
+To generate the embedding files (\*.vec) for a new language, you can use `gensim`: (where filename is the file containing tokenized and lower-cased English/foreign language text)
 ```
 import gensim, logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -53,7 +53,7 @@ model.wv.save_word2vec_format(fileoutname)
 ./run.sh ko en.vec ko.vec ko.json ko.words
 ```
 
-##Troubleshooting
+## Troubleshooting
 1. If out-of-memory, modify this line in `run.sh` with higher memory requirement: e.g., -Xmx200G
 ```
 MAVEN_OPTS="-Xmx200G" mvn exec:java -Dexec.mainClass=librec.main.LibRec -Dexec.args="-c multi/config/BPR-$lang.conf"
