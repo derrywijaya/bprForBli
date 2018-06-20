@@ -44,7 +44,7 @@ sentences = gensim.models.word2vec.LineSentence(filename)
 model = gensim.models.Word2Vec(sentences, iter=15, negative=15)
 model.wv.save_word2vec_format(fileoutname)
 ```
-where `filename` is the file containing `tokenized` and `lower-cased` text. For example, we use `tokenized` and `lower-cased` Wikipedia English text to generate `en.vec` and Wikipedia Korean text to generate `ko.vec`.
+where `filename` is the file containing `tokenized` and `lower-cased` text. For example, we use `tokenized` and `lower-cased` Wikipedia English text to generate `en.vec` and Wikipedia Korean text to generate `ko.vec`
 
 6. Execute `run.sh` with 5 arguments: 
 * 2-letter language code of the foreign language
