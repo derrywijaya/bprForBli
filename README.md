@@ -3,19 +3,29 @@
 The code for the paper: Learning Translations via Matrix Completion, Wijaya et al., EMNLP 2017
 
 REQUIREMENTS:
+
 java
+
 maven
+
 tensorflow
+
 numpy
+
 math
+
 sklearn
 
 INSTRUCTIONS:
 (1) Download bprForBli.tar.xz and unzip it
+
 (2) cd to librec directory
+
 (3) install happy coding:
 mvn install:install-file -Dfile=lib/happy.coding.utils-1.2.5.jar -DgroupId=happy.coding -DartifactId=utils -Dversion=1.2.5 -Dpackaging=jar
+
 (4) mvn clean install
+
 (5) Gather the required files:
 -- en.vec: english word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased
 -- fo.vec: foreign word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased
