@@ -56,6 +56,9 @@ where `filename` is the file containing `tokenized` and `lower-cased` text. For 
 ./run.sh ko en.vec ko.vec ko.json ko.words
 ```
 
+## Pre-computed Translations
+Available in our [website](https://www.seas.upenn.edu/~derry/translations.html)
+
 ## Troubleshooting
 1. If out-of-memory, modify this line in `run.sh` with higher memory requirement: e.g., -Xmx200G
 ```
