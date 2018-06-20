@@ -1,7 +1,7 @@
 # bprForBli
 ## Bayesian Personalized Ranking for Bilingual Lexicon Induction:
 
-The code for the paper: Learning Translations via Matrix Completion, Wijaya et al., EMNLP 2017
+The code for the paper: [Learning Translations via Matrix Completion](https://www.seas.upenn.edu/~derry/bpr.pdf), Wijaya et al., EMNLP 2017
 
 Citation:
 
@@ -57,7 +57,7 @@ where `filename` is the file containing `tokenized` and `lower-cased` text. For 
 ```
 
 ## Pre-computed Translations
-Available in our [website](https://www.seas.upenn.edu/~derry/translations.html)
+Available in our [website](https://www.seas.upenn.edu/~derry/translations.html) 
 
 ## Troubleshooting
 1. If out-of-memory, modify this line in `run.sh` with higher memory requirement: e.g., -Xmx200G
