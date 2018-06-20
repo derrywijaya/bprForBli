@@ -36,7 +36,7 @@ mvn clean install
 * Bilingual dictionary, in JSON format, all lower cased e.g., [ko.json](https://www.seas.upenn.edu/~derry/ko.json)
 * List of foreign words to be translated, one word per line, all lower-cased e.g., [ko.words](https://www.seas.upenn.edu/~derry/ko.words)
 
-To generate the embedding files (\*`.vec`) for a new language, you can use `gensim`: (where filename is the file containing tokenized and lower-cased English/foreign language text)
+To generate the embedding files (\*`.vec`) for a new language, you can use `gensim`: (where `filename` is the file containing `tokenized` and `lower-cased` text i.e., we use Wikipedia English text to generate en.vec and Wikipedia Korean text to generate ko.vec)
 ```
 import gensim, logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
