@@ -43,19 +43,19 @@ sentences = gensim.models.word2vec.LineSentence(filename)
 model = gensim.models.Word2Vec(sentences, iter=15, negative=15)
 model.wv.save_word2vec_format(fileoutname)
 ```
-6. Execute run.sh with 5 arguments: 
+6. Execute `run.sh` with 5 arguments: 
 * 2-letter language code of the foreign language
-* English word embeddings file e.g., en.vec
-* Foreign word embeddings file e.g., ko.vec
-* Bilingual dictionary file e.g., ko.json
-* List of foreign language words to be translated e.g., ko.words 
+* English word embeddings file e.g., `en.vec`
+* Foreign word embeddings file e.g., `ko.vec`
+* Bilingual dictionary file e.g., `ko.json`
+* List of foreign language words to be translated e.g., `ko.words`
 ```
 ./run.sh ko en.vec ko.vec ko.json ko.words
 ```
 
 ##Troubleshooting
-1. If out-of-memory, modify this line in run.sh with higher memory requirement: e.g., -Xmx200G
+1. If out-of-memory, modify this line in `run.sh` with higher memory requirement: e.g., -Xmx200G
 ```
 MAVEN_OPTS="-Xmx200G" mvn exec:java -Dexec.mainClass=librec.main.LibRec -Dexec.args="-c multi/config/BPR-$lang.conf"
 ```
-2. If you encounter problem, try running the commands in run.sh line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., `sed`) in run.sh to run differently. 
+2. If you encounter problem, try running the commands in `run.sh` line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., `sed`) in the script to run differently. 
