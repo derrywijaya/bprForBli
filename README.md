@@ -78,5 +78,5 @@ System.out.println(Charset.defaultCharset().name());
 ```
 If your default Java encoding is not UTF-8, append this to all commands involving `java` in `run.sh`:
 ```
-java -Dfile.encoding=UTF-8 ...
+java -Dfile.encoding=UTF-8 
 ```
