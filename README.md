@@ -71,12 +71,12 @@ tail -n +2 $english | sed 's/^/row-/g' | sed 's/,/_/g' > user.en.vec
 tail -n +2 $foreign | sed 's/^/column-/g' | sed 's/,/_/g' > user.$lang.vec
 export LC_ALL=""
 ```
-3. Java often has different default encoding in different environment. This code assumes UTF8 encoding. To find out your machine's default Java encoding, you can run this command inside a Java program:
+3. Java often has different default encoding in different environment. This code assumes UTF-8 encoding. To find out your machine's default Java encoding, you can run this command inside a Java program:
 ```
 import java.nio.charset.Charset;
 System.out.println(Charset.defaultCharset().name());
 ```
-If your default Java encoding is not UTF8, append this to all `java` commands in `run.sh`:
+If your default Java encoding is not UTF-8, append this to all `java` commands in `run.sh`:
 ```
 java -Dfile.encoding=UTF-8 ...
 ```
