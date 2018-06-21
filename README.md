@@ -64,4 +64,19 @@ Available in our [website](https://www.seas.upenn.edu/~derry/translations.html)
 ```
 MAVEN_OPTS="-Xmx200G" mvn exec:java -Dexec.mainClass=librec.main.LibRec -Dexec.args="-c multi/config/BPR-$lang.conf"
 ```
-2. If you encounter problem, try running the commands in `run.sh` line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., `sed`) in the script to run differently. 
+2. If you encounter problem, try running the commands in `run.sh` line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., `sed`) in the script to run differently. If running `sed` gives an error "sed: RE error: illegal byte sequence" modify `run.sh` to include these commands instead:
+```
+export LC_ALL=C
+tail -n +2 $english | sed 's/^/row-/g' | sed 's/,/_/g' > user.en.vec
+tail -n +2 $foreign | sed 's/^/column-/g' | sed 's/,/_/g' > user.$lang.vec
+export LC_ALL=""
+```
+3. Java often has different default encoding in different environment. This code assumes UTF8 encoding. To find out your machine's default Java encoding, you can run this command inside a Java program:
+```
+import java.nio.charset.Charset;
+System.out.println(Charset.defaultCharset().name());
+```
+If your default Java encoding is not UTF8, append this to all `java` commands in `run.sh`:
+```
+java -Dfile.encoding=UTF-8 ...
+```
