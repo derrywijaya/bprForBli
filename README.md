@@ -17,7 +17,7 @@ Citation:
 
 ## Requirements:
 
-java, maven, tensorflow, numpy, math, sklearn, sed
+python 2.7, java, maven, tensorflow, numpy, math, sklearn, sed
 
 ## Instructions:
 1. Download [bprForBli.tar.xz](https://www.seas.upenn.edu/~derry/bprForBli.tar.xz) and unzip it
