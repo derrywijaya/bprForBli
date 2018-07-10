@@ -20,7 +20,7 @@ Citation:
 python 2.7, java, maven, tensorflow, numpy, math, sklearn, sed
 
 ## Instructions:
-1. Download [bprForBli.tar.xz](https://www.seas.upenn.edu/~derry/bprForBli.tar.xz) and unzip it
+1. Download [bprForBli.tar.gz](https://www.seas.upenn.edu/~derry/bprForBli.tar.gz) and unzip it
 2. Change directory `cd` to librec directory
 3. Install `happy coding`:
 ```
