@@ -73,7 +73,7 @@ tail -n +2 $foreign | sed 's/^/column-/g' | sed 's/,/_/g' > user.$lang.vec
 export LANG=$OLDLANG
 unset OLDLANG
 ```
-`cut --complement` in Mac differs from Linux, in Mac you should modify the `cut --complement` commands in `run.sh` from
+`cut` in Mac differs from Linux, in Mac you should modify the `cut --complement` commands in `run.sh` from
 ```
 cut -f1 -d' ' $lang-en.vector.extended --complement > $lang-en.vector.extended.vector
 ```
