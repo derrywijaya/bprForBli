@@ -64,13 +64,24 @@ Available in our [website](https://www.seas.upenn.edu/~derry/translations.html)
 ```
 MAVEN_OPTS="-Xmx200G" mvn exec:java -Dexec.mainClass=librec.main.LibRec -Dexec.args="-c multi/config/BPR-$lang.conf"
 ```
-2. If you encounter problem, try running the commands in `run.sh` line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., `sed`) in the script to run differently. If running `sed` gives an error "sed: RE error: illegal byte sequence" modify `run.sh` to include these commands instead:
+2. If you encounter problem, try running the commands in `run.sh` line by line and debugging the errors. This code has been tested on a Linux machine, but running it on other machines may cause some of the commands (e.g., `sed`, `cut`) in the script to run differently. If running `sed` gives an error "sed: RE error: illegal byte sequence" modify `run.sh` to include these commands instead:
 ```
-export LC_ALL=C
+export OLDLANG=$LANG
+export LANG=C
 tail -n +2 $english | sed 's/^/row-/g' | sed 's/,/_/g' > user.en.vec
 tail -n +2 $foreign | sed 's/^/column-/g' | sed 's/,/_/g' > user.$lang.vec
-export LC_ALL=""
+export LANG=$OLDLANG
+unset OLDLANG
 ```
+`cut --complement` in Mac differs from Linux, in Mac you should modify the `cut --complement` commands in `run.sh` from
+```
+cut -f1 -d' ' $lang-en.vector.extended --complement > $lang-en.vector.extended.vector
+```
+to
+```
+cut -f2- -d' ' $lang-en.vector.extended > $lang-en.vector.extended.vector
+```
+
 3. Java often has different default encoding in different environment. This code assumes UTF-8 encoding. To find out your machine's default Java encoding, you can run this command inside a Java program:
 ```
 import java.nio.charset.Charset;
