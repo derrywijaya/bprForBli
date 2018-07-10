@@ -10,7 +10,7 @@ git clone https://github.com/attardi/wikiextractor
 cd wikiextractor
 bzcat wikidumpfile.bz2 | WikiExtractor.py -b 1G -o directorywhereyouwanttoputthetext/ -
 ```
-3. Combine the output text files into one text file and run your favorite sentence-splitter and tokenizer to sentence-split, tokenize, and lower case the text. For example, using Stanford CoreNLP:
+3. Combine the output text files into one text file and run your favorite sentence-splitter and tokenizer to sentence-split, tokenize, and lower case the text. For example, using Stanford CoreNLP (required jar files [here](https://www.seas.upenn.edu/~derry/corenlpjarfiles.tar.gz)):
 ```
 // creates a StanfordCoreNLP object
 Properties props = new Properties();
