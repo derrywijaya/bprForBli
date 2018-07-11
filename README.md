@@ -39,10 +39,12 @@ pip install scipy
 pip install tensorflow
 ```
 6. Gather the required files:
-* English word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased e.g., [en.vec](https://www.seas.upenn.edu/~derry/en.vec)
-* Foreign word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased e.g., [ko.vec](https://www.seas.upenn.edu/~derry/ko.vec)
-* Bilingual dictionary, in JSON format, all lower cased e.g., [ko.json](https://www.seas.upenn.edu/~derry/ko.json)
-* List of foreign words to be translated, one word per line, all lower-cased e.g., [ko.words](https://www.seas.upenn.edu/~derry/ko.words)
+* English word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased
+* Foreign word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased
+* Bilingual dictionary, in JSON format, all lower cased in our Json format e.g., [ko.json](https://www.seas.upenn.edu/~derry/ko.json)
+* List of foreign words to be translated, one word per line, all lower-cased 
+* For BPR we also use several files derived from Wikipedia 
+You can grab a [tarball of example files here](https://cis.upenn.edu/~ccb/data/emnlp-2017/data.tar.gz).
 
 To generate the embedding files (\*`.vec`) for a new language, you can use `gensim`: 
 ```
