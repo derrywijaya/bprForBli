@@ -62,7 +62,7 @@ where `filename` is the file containing `sentence-separated`, `tokenized`, and `
 * List of foreign language words to be translated e.g., `ko.words`
 * The path to where your `code/` directory where run.sh is located.
 ```
-./run.sh ko en.vec ko.vec ko.json ko.words ../../code/
+./run.sh ko en.vec ko.vec ko.json ko.words ./
 ```
 
 ## Pre-computed Translations
