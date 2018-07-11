@@ -1,0 +1,7 @@
+Dataset: ./demo/Datasets/ko/ko.train.norm
+With Setup: test-set -f ./demo/Datasets/ko/test-ko.txt -p on --rand-seed 1 --test-view all
+Dataset: ./demo/Datasets/ko/test-ko.txt
+Dataset: ./demo/Datasets/ko/ko-en.context
+Dataset: ./demo/Datasets/ko/ko.extended.norm
+BPRWEExtended,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,,0.0, 20, 0.01, -1.0, 0.1, 0.1, 0.1, 0.1, 100,'8 days, 03:09:32.154','02:11:15'
+
