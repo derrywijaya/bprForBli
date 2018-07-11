@@ -20,17 +20,25 @@ Citation:
 python 2.7, java, maven, tensorflow, numpy, math, sklearn, sed
 
 ## Instructions:
-1. Download [bprForBli.tar.gz](https://www.seas.upenn.edu/~derry/bprForBli.tar.gz) and unzip it
-2. Change directory `cd` to librec directory
-3. Install `happy coding`:
+1. cd into the `code/` subdirectory
+2. Install `happy coding` using Maven:
 ```
 mvn install:install-file -Dfile=lib/happy.coding.utils-1.2.5.jar -DgroupId=happy.coding -DartifactId=utils -Dversion=1.2.5 -Dpackaging=jar
 ```
-4. Do a clean install: 
+3. Do a clean install: 
 ```
 mvn clean install
 ```
-5. Gather the required files:
+4. run `javac -cp lib/json-simple-1.1.1.jar:lib/happy.coding.utils-1.2.5.jar *java`
+5. Install the python dependencies 
+```
+python -m virtualenv env
+source env/bin/activate
+pip install sklearn
+pip install scipy
+pip install tensorflow
+```
+6. Gather the required files:
 * English word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased e.g., [en.vec](https://www.seas.upenn.edu/~derry/en.vec)
 * Foreign word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased e.g., [ko.vec](https://www.seas.upenn.edu/~derry/ko.vec)
 * Bilingual dictionary, in JSON format, all lower cased e.g., [ko.json](https://www.seas.upenn.edu/~derry/ko.json)
@@ -46,14 +54,15 @@ model.wv.save_word2vec_format(fileoutname)
 ```
 where `filename` is the file containing `sentence-separated`, `tokenized`, and `lower-cased` text (one sentence = one line). For example, we `sentence-split`, `tokenized`, and `lower-cased` Wikipedia English text to generate `en.vec` and Wikipedia Korean text to generate `ko.vec` (see [here](Wikipedia/README.md) for instructions to get text from Wikipedia and to sentence-split, tokenize, and lower-case it)
 
-6. Execute `run.sh` with 5 arguments: 
+6. Execute `run.sh` with 6 arguments: 
 * 2-letter language code of the foreign language
 * English word embeddings file e.g., `en.vec`
 * Foreign word embeddings file e.g., `ko.vec`
 * Bilingual dictionary file e.g., `ko.json`
 * List of foreign language words to be translated e.g., `ko.words`
+* The path to where your `code/` directory where run.sh is located.
 ```
-./run.sh ko en.vec ko.vec ko.json ko.words
+./run.sh ko en.vec ko.vec ko.json ko.words ../../code/
 ```
 
 ## Pre-computed Translations
