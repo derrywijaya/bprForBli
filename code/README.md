@@ -74,11 +74,11 @@ where `filename` is the file containing `tokenized` and `lower-cased` text. For 
 ```bash
 python convertMatrix.py <language's dir> <Magnitude's dir>
 e.g python convertMatrix.py data/ko/ data/magnitude/ko/
-
+```
 4. All converted matrices are stored in a sub-directory called 'processed'. Convert each matrix to Magnitude by running:
 ```bash
 python -m pymagnitude.converter -i <input path> -o <output path> -a 
-
+```
 5. Produce translation outputs by running:
 ```bash
 python translate.py <language's dir> <Magnitude's dir>
