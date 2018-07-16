@@ -37,6 +37,7 @@ source env/bin/activate
 pip install sklearn
 pip install scipy
 pip install tensorflow
+pip install pymagnitude
 ```
 6. Gather the required files:
 * English word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased
