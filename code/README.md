@@ -56,7 +56,7 @@ model.wv.save_word2vec_format(fileoutname)
 ```
 where `filename` is the file containing `tokenized` and `lower-cased` text. For example, we use `tokenized` and `lower-cased` Wikipedia English text to generate `en.vec` and Wikipedia Korean text to generate `ko.vec`
 
-6. Execute `run.sh` with 5 arguments: 
+7. Execute `run.sh` with 5 arguments: 
 * 2-letter language code of the foreign language
 * English word embeddings file e.g., `en.vec`
 * Foreign word embeddings file e.g., `ko.vec`
@@ -65,7 +65,24 @@ where `filename` is the file containing `tokenized` and `lower-cased` text. For 
 ```
 ./run.sh ko en.vec ko.vec ko.json ko.words
 ```
+## Translate words using Magnitude's Approximate kNN:
+1. In the language's directory, create a sub-directory called 'matrices' and move all matrices of bilingual embeddings to this directory. Please find files with the following names: 'wikiPMatrix.txt', 'wikiQMatrix.txt', 'thirdTPMatrix.txt', 'thirdTQMatrix.txt', 'EMatrix.txt', 'extendedMatrix.txt'. Note that some languages won't have all six files.
 
+2. Create a directory that will later store embeddings in Magnitude format
+
+3. Run the following command to convert matrices to a format that Magnitude can process:
+```bash
+python convertMatrix.py <language's dir> <Magnitude's dir>
+e.g python convertMatrix.py data/ko/ data/magnitude/ko/
+```
+4. All converted matrices are stored in a sub-directory called 'processed'. Convert each matrix to Magnitude by running:
+```bash
+python -m pymagnitude.converter -i <input path> -o <output path> -a 
+```
+5. Produce translation outputs by running:
+```bash
+python translate.py <language's dir> <Magnitude's dir>
+```
 ## Pre-computed Translations
 Available in our [website](https://www.seas.upenn.edu/~derry/translations.html) 
 
