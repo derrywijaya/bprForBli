@@ -6,13 +6,13 @@ Save translation outputs to txt file
 import numpy as np
 import pandas as pd
 from pymagnitude import *
-from convert_matrix import parse_args, process_bias_vec
+from argparse import ArgumentParser
+from convertMatrix import process_bias_vec
 import os
 
-def find_translations():
-    args = parse_args()
+def find_BPR_translations(args):
     path = args.lang_dir
-    if os.path.exists(path+'translations.txt'):
+    if os.path.exists(path+'BPR_trans.txt'):
         print('Warning: Translation outputs have already been produced.')
         exit()
     
@@ -39,7 +39,7 @@ def find_translations():
     if 'EPMatrix.magnitude' in files:
         eng_ex = Magnitude(magnitude_path+'EPMatrix.magnitude')
         foreign_ex = Magnitude(magnitude_path+'EQMatrix.magnitude')
-    
+
     for i in range(foreign_words.shape[0]):
         word = foreign_words[i][0]
         wiki_trans, third_trans, ex_trans = [], [], []
@@ -63,7 +63,7 @@ def find_translations():
             ex_trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
             bias_score = np.dot(bias, foreign_vec)
             ex_trans = [(w,v+bias_score) for w,v in ex_trans]
-        
+
         # remove duplicates that already appear in more reliable matrices
         if len(wiki_trans) > 0: 
             third_trans = [t for t in third_trans if t[0] not in wiki_dict]
@@ -77,10 +77,59 @@ def find_translations():
             if j < len(trans)-1:
                 line += ', '
 
-        with open(path+'translations.txt', 'a') as f:
+        with open(path+'BPR_trans.txt', 'a') as f:
             f.write(line+'\n')
+
     print('### TRANSLATION IS COMPLETE ###')
-    print('Translation outputs are stored at {}translation.txt'.format(args.lang_dir))
+    print('Translation outputs are stored at {}BPR_trans.txt'.format(args.lang_dir))
+
+def find_monovec_translations(args): 
+    path = args.lang_dir
+    if os.path.exists(path+'monovec_trans.txt'):
+        print('Warning: Translation outputs have already been produced.')
+        exit()
+    
+    lang_dir = args.lang_dir.split('/')
+    lang = lang_dir[len(lang_dir)-2]
+    foreign_words = pd.read_csv(path+lang+'.totranslate.norm', header=None).values
+
+    magnitude_path = args.vec_dir
+    files = os.listdir(magnitude_path)
+    
+    if 'user.'+lang+'.magnitude' in files: 
+        eng_ex = Magnitude(magnitude_path+'EPMatrix.magnitude')
+        foreign_ex = Magnitude(magnitude_path+'user.'+lang+'.magnitude')
+    
+    for i in range(foreign_words.shape[0]):
+        word = foreign_words[i][0]
+        if word in foreign_ex:
+            foreign_vec = foreign_ex.query(word)
+            trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
+         
+        line = ''
+        line = str(i) + ': ' + foreign_words[i][0] + ': '
+        for j in range(len(trans)):
+            line += str(trans[j])
+            if j < len(trans)-1:
+                line += ', '
+
+        with open(path+'monovec_trans.txt', 'a') as f:
+            f.write(line+'\n')
+
+    print('### TRANSLATION IS COMPLETE ###')
+    print('Translation outputs are stored at {}monovec_trans.txt'.format(args.lang_dir))
+
+def parse_args():
+    parser = ArgumentParser()
+    parser.add_argument('lang_dir', type=str, help='path to a language\'s directory')
+    parser.add_argument('vec_dir', type=str, help='path to the directory of Magnitude')
+    parser.add_argument('--vec', type=str, default='BPR', help='Type of vectors to use for translation: [BPR, monolingual')
+    args = parser.parse_args()
+    return args 
 
 if __name__=='__main__':
-    find_translations()
+    args = parse_args()
+    if args.vec == 'BPR':
+        find_BPR_translations(args)
+    elif args.vec == 'monolingual':
+        find_monovec_translations(args)
