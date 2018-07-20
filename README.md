@@ -37,6 +37,7 @@ source env/bin/activate
 pip install numpy
 pip install scipy
 pip install sklearn
+pip install --upgrade pip
 pip install tensorflow
 pip install pymagnitude
 pip install pandas
