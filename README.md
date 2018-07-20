@@ -25,9 +25,11 @@ python 2.7, java, maven, tensorflow, numpy, math, sklearn, sed
 ```
 mvn install:install-file -Dfile=lib/happy.coding.utils-1.2.5.jar -DgroupId=happy.coding -DartifactId=utils -Dversion=1.2.5 -Dpackaging=jar
 ```
-3. Do a clean install: 
+3. Do a clean install, then clean and compile: 
 ```
 mvn clean install
+mvn clean
+mvn compile
 ```
 4. run `javac -cp lib/json-simple-1.1.1.jar:lib/happy.coding.utils-1.2.5.jar *java`
 5. Install the python dependencies 
