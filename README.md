@@ -34,8 +34,9 @@ mvn clean install
 ```
 python -m virtualenv env
 source env/bin/activate
-pip install sklearn
+pip install numpy
 pip install scipy
+pip install sklearn
 pip install tensorflow
 pip install pymagnitude
 pip install pandas
@@ -47,7 +48,12 @@ pip install pathlib
 * Bilingual dictionary, in JSON format, all lower cased in our Json format e.g., [ko.json](https://www.seas.upenn.edu/~derry/ko.json)
 * List of foreign words to be translated, one word per line, all lower-cased 
 * For BPR we also use several files derived from Wikipedia 
-You can grab a [tarball of example files here](https://cis.upenn.edu/~ccb/data/emnlp-2017/data.tar.gz).
+You can grab a [tarball of necessary data files here](https://cis.upenn.edu/~ccb/data/emnlp-2017/data.tar.gz). Then run
+```
+wget https://cis.upenn.edu/~ccb/data/emnlp-2017/data.tar.gz
+tar xfz data.tar.gz
+mv data/* .
+```
 
 To generate the embedding files (\*`.vec`) for a new language, you can use `gensim`: 
 ```
