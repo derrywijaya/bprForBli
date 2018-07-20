@@ -73,7 +73,12 @@ model.wv.save_word2vec_format(fileoutname)
 ```
 where `filename` is the file containing `sentence-separated`, `tokenized`, and `lower-cased` text (one sentence = one line). For example, we `sentence-split`, `tokenized`, and `lower-cased` Wikipedia English text to generate `en.vec` and Wikipedia Korean text to generate `ko.vec` (see [here](Wikipedia/README.md) for instructions to get text from Wikipedia and to sentence-split, tokenize, and lower-case it)
 
-7. Execute `run.sh` with 6 arguments: 
+7. Activate your virtual environment if not already activated 
+``
+source env/bin/activate
+``
+
+8. Execute `run.sh` with 6 arguments: 
 * 2-letter language code of the foreign language
 * English word embeddings file e.g., `en.vec`
 * Foreign word embeddings file e.g., `ko.vec`
