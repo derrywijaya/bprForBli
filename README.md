@@ -54,6 +54,13 @@ wget https://cis.upenn.edu/~ccb/data/emnlp-2017/data.tar.gz
 tar xfz data.tar.gz
 mv data/* .
 ```
+In addition the tarball contains the following files:
+* englishwordslemma.txt - lemma of english words (used in the evaluation of our paper)
+* interlanguage.txt - the interlingual links from Wikipedia that is used to populate the matrix (used in the matrix completion using Wikipedia phase)
+* languagesdata - the foreign-english translations from our MTurk dictionary (used in the matrix completion using third languages phase that is linked to interlingual links from Wikipedia)
+* namedentitiesfromwiki-uniq.txt - list of named entities from Wikipedia (used in finding similarity of strings to get better named entities translation -- added after the paper, only works for Roman script languages)
+* wiki.en.top.words - top 100K english words from Wikipedia based on frequency (used to filter target English words -- this is the complete set of target English words -- if your target vocabulary is more than these top 100K, you can replace this file with your total English vocabulary file -- note the format it prepends ``row-'' and replaces ``,'' with ``_'')
+
 
 To generate the embedding files (\*`.vec`) for a new language, you can use `gensim`: 
 ```
