@@ -100,10 +100,11 @@ source env/bin/activate
 python3 convertMatrix.py <language's dir> <Magnitude's dir>
 e.g python3 convertMatrix.py demo/Results/ko/ demo/Results/ko/magnitudes/
 ```
-4. Install gensim and [magnitude](https://github.com/plasticityai/magnitude) if not yet installed:
+4. Install gensim and [magnitude](https://github.com/plasticityai/magnitude) -- for both python2 and python3 if not yet installed:
 ```
 pip install gensim
 pip install pymagnitude
+python3 -m pip install pymagnitude
 ```
 5. All converted matrices are stored in a sub-directory called 'processed'. Convert each matrix to Magnitude by running:
 ```bash
@@ -149,5 +150,3 @@ If your default Java encoding is not UTF-8, append this to all commands involvin
 ```
 java -Dfile.encoding=UTF-8 
 ```
-
-The end.

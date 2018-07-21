@@ -130,3 +130,6 @@ for filename in demo/Results/$lang/processed/*; do
   python -m pymagnitude.converter -i  $filename -o $filemag2 -a
 done
 mv demo/Results/$lang/magnitudes/matrix.magnitude demo/Results/$lang/magnitudes/EQMatrix.magnitude
+python3 -m pip install pymagnitude
+cp output/$lang/$lang.totranslate.norm demo/Results/$lang/
+python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
