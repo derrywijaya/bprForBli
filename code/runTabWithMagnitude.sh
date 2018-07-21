@@ -22,7 +22,7 @@ export LANG=$OLDLANG
 unset OLDLANG
 
 echo "assemble the train and test files for learning the mapping between the embedding spaces from the bilingual dictionary"
-java -Dfile.encoding=UTF-8 -cp . readDictionaryTab $dictionary user.en.vec user.$lang.vec train-$lang.txt test-$lang.txt > context-$lang.txt
+java -Dfile.encoding=UTF-8 -cp $path_to_code readDictionaryTab $dictionary user.en.vec user.$lang.vec train-$lang.txt test-$lang.txt > context-$lang.txt
 grep '^row-' context-$lang.txt > context-$lang-en.txt 
 grep '^column-' context-$lang.txt > context-$lang-$lang.txt 
 grep ' column-' train-$lang.txt > $lang-dict-mturk.txt
@@ -133,3 +133,5 @@ mv demo/Results/$lang/magnitudes/matrix.magnitude demo/Results/$lang/magnitudes/
 python3 -m pip install pymagnitude
 cp output/$lang/$lang.totranslate.norm demo/Results/$lang/
 python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
+java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/BPR_trans.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
+echo "resulting translations produced by magnitude is written to  demo/Results/$lang/translations.txt"

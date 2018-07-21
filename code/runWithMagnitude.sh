@@ -132,3 +132,5 @@ mv demo/Results/$lang/magnitudes/matrix.magnitude demo/Results/$lang/magnitudes/
 python3 -m pip install pymagnitude
 cp output/$lang/$lang.totranslate.norm demo/Results/$lang/
 python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
+java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/BPR_trans.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
+echo "resulting translations produced by magnitude is written to  demo/Results/$lang/translations.txt"
