@@ -90,7 +90,7 @@ source env/bin/activate
 ```
 ./run.sh ko en.vec ko.vec ko.json ko.words ./
 ```
-NOTE: If your bilingual dictionary is not on json format, you can run `runTab.sh` instead with the same parameters. It takes bilingual dictionary that is in tab-separated format i.e., each line is `foreign\_word` <tab> `english\_word`
+NOTE: If your bilingual dictionary is not on json format, you can run `runTab.sh` in the `code` directory instead with the same parameters. It takes bilingual dictionary that is in tab-separated format i.e., each line is `foreignWord` tab `englishWord`
 
 ## Translate words using Magnitude's Approximate kNN:
 1. In the language's directory, create a sub-directory called 'matrices' and move all matrices of bilingual embeddings to this directory. Please find files with the following names: 'wikiPMatrix.txt', 'wikiQMatrix.txt', 'thirdTPMatrix.txt', 'thirdTQMatrix.txt', 'EMatrix.txt', 'extendedMatrix.txt'. Note that some languages won't have all six files.
