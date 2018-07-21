@@ -120,10 +120,13 @@ echo "matrices are written to /demo/Results/$lang/"
 mkdir -p demo/Results/$lang/matrices/
 mv demo/Results/$lang/*trix* demo/Results/$lang/matrices/
 mkdir -p demo/Results/$lang/magnitudes/
-python3 convertMatrix.py demo/Results/ko/ demo/Results/ko/magnitudes/
+python3 convertMatrix.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
+mv demo/Results/$lang/processed/EQMatrix.txt demo/Results/$lang/processed/matrix.txt
 pip install pymagnitude
 pip install gensim
 for filename in demo/Results/$lang/processed/*; do
   filemag=`echo $filename | sed 's/.txt/.magnitude/g' `
-  python -m pymagnitude.converter -i  $filename -o $filemag -a
+  filemag2=`echo $filemag | sed 's/processed/magnitudes/g' `
+  python -m pymagnitude.converter -i  $filename -o $filemag2 -a
 done
+mv demo/Results/$lang/magnitudes/matrix.magnitude demo/Results/$lang/magnitudes/EQMatrix.magnitude
