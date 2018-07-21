@@ -19,7 +19,7 @@ export LANG=$OLDLANG
 unset OLDLANG
 
 echo "assemble the train and test files for learning the mapping between the embedding spaces from the bilingual dictionary"
-java -Dfile.encoding=UTF-8 -cp .:$path_to_code:$path_to_code/lib/json-simple-1.1.1.jar readDictionary $dictionary user.en.vec user.$lang.vec train-$lang.txt test-$lang.txt > context-$lang.txt
+java -Dfile.encoding=UTF-8 -cp . readDictionaryTab $dictionary user.en.vec user.$lang.vec train-$lang.txt test-$lang.txt > context-$lang.txt
 grep '^row-' context-$lang.txt > context-$lang-en.txt 
 grep '^column-' context-$lang.txt > context-$lang-$lang.txt 
 grep ' column-' train-$lang.txt > $lang-dict-mturk.txt

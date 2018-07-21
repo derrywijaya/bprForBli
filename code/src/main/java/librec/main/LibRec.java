@@ -62,6 +62,7 @@ import librec.ranking.AllNNBPRE;
 import librec.ranking.BHfree;
 import librec.ranking.BPR;
 import librec.ranking.BPRWEExtended;
+import librec.ranking.BPRWEExtendedPrint;
 import librec.ranking.BUCM;
 import librec.ranking.CABPR;
 import librec.ranking.CBPR;
@@ -831,6 +832,8 @@ public class LibRec {
 			return new LNBPR(trainMatrix, testMatrix, fold);
 		case "bprweextended":
 			return new BPRWEExtended(trainMatrix, testMatrix, fold);
+		case "bprweextendedprint":
+			return new BPRWEExtendedPrint(trainMatrix, testMatrix, fold);
 		case "csbpr":
 			return new CSBPR(trainMatrix, testMatrix, fold);
 		case "cobpr":

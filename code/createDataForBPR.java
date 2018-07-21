@@ -53,7 +53,8 @@ class createDataForBPR {
 			BufferedReader bfr = new BufferedReader(new FileReader("context-"+language+"-en.txt"));	
 			String l;
 			while ((l = bfr.readLine()) != null) {
-				String temp[] = l.toLowerCase().trim().split(" ");
+				l = l.toLowerCase();
+				String temp[] = l.trim().split(" ");
 				String word = temp[0].trim();
 				l = "hellohello" + l.trim();
 				String rest = l.replace("hellohello"+word, "").trim();
@@ -70,7 +71,8 @@ class createDataForBPR {
 			BufferedReader bfr = new BufferedReader(new FileReader("context-"+language+"-"+language+".txt"));	
 			String l;
 			while ((l = bfr.readLine()) != null) {
-				String temp[] = l.toLowerCase().trim().split(" ");
+				l = l.toLowerCase();
+				String temp[] = l.trim().split(" ");
 				String word = temp[0].trim();
 				l = "hellohello" + l.trim();
 				String rest = l.replace("hellohello"+word, "").trim();
@@ -103,7 +105,8 @@ class createDataForBPR {
 			String l;
 			bfr.readLine();
 			while ((l = bfr.readLine()) != null) {
-				String temp[] = l.toLowerCase().trim().split(" ");
+				l = l.toLowerCase();
+				String temp[] = l.trim().split(" ");
 				String word = temp[0].trim();
 				l = "hellohello" + l.trim();
 				String rest = l.replace("hellohello"+word, "").trim();
