@@ -93,6 +93,11 @@ source env/bin/activate
 NOTE: If your bilingual dictionary is not on json format, you can run `runTab.sh` in the `code` directory instead with the same parameters. It takes bilingual dictionary that is in tab-separated format i.e., each line is `foreignWord` tab `englishWord`
 
 ## Translate words using Magnitude's Approximate kNN:
+
+If you want to produce translations fast, run `runWithMagnitude.sh` in the `code` directory instead of `run.sh` with the same parameters as `run.sh` (Similarly, if your bilingual dictionary is not of JSON format but is tab-separated, run `runTabWithMagnitude.sh` in the `code` directory instead).
+
+The details of what `runWithMagnitude.sh` contains are below:
+
 1. In the language's directory, create a sub-directory called 'matrices' and move all matrices of bilingual embeddings to this directory. Please find files with the following names: 'wikiPMatrix.txt', 'wikiQMatrix.txt', 'thirdTPMatrix.txt', 'thirdTQMatrix.txt', 'EMatrix.txt', 'extendedMatrix.txt'. Note that some languages won't have all six files.
 
 2. Create a directory that will later store embeddings in Magnitude format
