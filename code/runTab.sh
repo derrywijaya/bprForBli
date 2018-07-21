@@ -1,7 +1,9 @@
 #!/bin/sh
-# Take arguments: 2-letter language code of the foreign language, english embeddings, foreign embeddings, json bilingual dictionary, 
-# and the list of foreign words to be translated (one word per line)
-#  e.g., ./run.sh sw en.vec sw.vec output/dictionary/sw.json sw.words
+# A script like run.sh but to enable running with tab-separated dictionary
+# Take arguments: 2-letter language code of the foreign language, english embeddings, foreign embeddings, bilingual dictionary
+# that is tab separated: foreign_word <tab> english_word, and the list of foreign words to be translated (one word per line), 
+# and the current directory
+# ./run.sh ko en.vec ko.vec ko.dict ko.words ./
 
 lang=$1
 english=$2

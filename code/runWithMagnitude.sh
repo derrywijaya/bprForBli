@@ -1,7 +1,9 @@
 #!/bin/sh
+# A script that is like run.sh but instead of printing BPR translations, it will print out BPR model matrices and
+# produce translations with Minh's fast magnitude translation
 # Take arguments: 2-letter language code of the foreign language, english embeddings, foreign embeddings, json bilingual dictionary, 
-# and the list of foreign words to be translated (one word per line)
-#  e.g., ./run.sh sw en.vec sw.vec output/dictionary/sw.json sw.words
+# the list of foreign words to be translated (one word per line), and the current directory
+# ./run.sh ko en.vec ko.vec ko.json ko.words ./
 
 lang=$1
 english=$2
