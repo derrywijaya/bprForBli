@@ -98,11 +98,12 @@ source env/bin/activate
 3. Run the following command to convert matrices to a format that Magnitude can process:
 ```bash
 python3 convertMatrix.py <language's dir> <Magnitude's dir>
-e.g python convertMatrix.py demo/Results/ko/ demo/Results/ko/magnitudes/
+e.g python3 convertMatrix.py demo/Results/ko/ demo/Results/ko/magnitudes/
 ```
-4. Install [magnitude](https://github.com/plasticityai/magnitude) if not yet installed:
+4. Install gensim and [magnitude](https://github.com/plasticityai/magnitude) if not yet installed:
 ```
-pip3 install pymagnitude
+pip install gensim
+pip install pymagnitude
 ```
 5. All converted matrices are stored in a sub-directory called 'processed'. Convert each matrix to Magnitude by running:
 ```bash
