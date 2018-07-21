@@ -116,3 +116,9 @@ echo "run BPR using the config file just created"
 MAVEN_OPTS="-Xmx150G" mvn exec:java -Dfile.encoding=UTF-8 -Dexec.mainClass=librec.main.LibRec -Dexec.args="-c BPR-$lang.conf"
 
 echo "matrices are written to /demo/Results/$lang/"
+mkdir -p demo/Results/$lang/matrices/
+mv demo/Results/$lang/*trix* demo/Results/$lang/matrices/
+mkdir -p demo/Results/$lang/magnitudes/
+python3 convertMatrix.py demo/Results/ko/ demo/Results/ko/magnitudes/
+
+
