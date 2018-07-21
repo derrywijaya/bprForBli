@@ -109,7 +109,7 @@ echo "num.max.iter=100" >> BPR-$lang.conf
 echo "learn.rate=0.01 -max -1 -bold-driver" >> BPR-$lang.conf
 echo "reg.lambda=0.1 -u 0.1 -i 0.1 -b 0.1 -c 0.1" >> BPR-$lang.conf
 echo "print=yes" >> BPR-$lang.conf
-echo "the output of BPR will be stored in /demo/Results/$lang/translations.txt"
+echo "the matrices of BPR will be stored in /demo/Results/$lang/translations.txt"
 mkdir -p demo/Results/$lang/
 echo "output.setup=on -dir ./demo/Results/$lang/" >> BPR-$lang.conf
 
