@@ -39,6 +39,8 @@ def find_BPR_translations(args):
     if 'EPMatrix.magnitude' in files:
         eng_ex = Magnitude(magnitude_path+'EPMatrix.magnitude')
         foreign_ex = Magnitude(magnitude_path+'EQMatrix.magnitude')
+    if 'user.'+lang+'.magnitude' in files: 
+        foreign_mono = Magnitude(magnitude_path+'user.'+lang+'.magnitude')
 
     for i in range(foreign_words.shape[0]):
         word = foreign_words[i][0]
@@ -63,13 +65,20 @@ def find_BPR_translations(args):
             ex_trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
             bias_score = np.dot(bias, foreign_vec)
             ex_trans = [(w,v+bias_score) for w,v in ex_trans]
-
+            
         # remove duplicates that already appear in more reliable matrices
         if len(wiki_trans) > 0: 
             third_trans = [t for t in third_trans if t[0] not in wiki_dict]
         ex_trans = [t for t in ex_trans if t[0] not in wiki_dict and t[0] not in third_dict]
+        
+        trans_total = wiki_trans + third_trans + ex_trans 
+        if len(trans_total) > 0:
+            trans = sorted(trans_total, key=lambda x:x[1], reverse=True)
+        # back off to monolingual vectors if word doesn't exist in any of previous 3 matrices 
+        else:
+            foreign_vec = foreign_mono.query(word)
+            trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
 
-        trans = sorted(wiki_trans + third_trans + ex_trans, key=lambda x:x[1], reverse=True)
         line = ''
         line = str(i) + ': ' + foreign_words[i][0] + ': '
         for j in range(len(trans)):
@@ -102,16 +111,16 @@ def find_monovec_translations(args):
     
     for i in range(foreign_words.shape[0]):
         word = foreign_words[i][0]
+        line = ''
         if word in foreign_ex:
             foreign_vec = foreign_ex.query(word)
             trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
-         
-        line = ''
-        line = str(i) + ': ' + foreign_words[i][0] + ': '
-        for j in range(len(trans)):
-            line += str(trans[j])
-            if j < len(trans)-1:
-                line += ', '
+
+            line = str(i) + ': ' + foreign_words[i][0] + ': '
+            for j in range(len(trans)):
+                line += str(trans[j])
+                if j < len(trans)-1:
+                    line += ', '
 
         with open(path+'monovec_trans.txt', 'a') as f:
             f.write(line+'\n')
