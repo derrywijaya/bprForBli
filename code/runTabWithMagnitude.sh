@@ -123,6 +123,7 @@ mv demo/Results/$lang/*trix* demo/Results/$lang/matrices/
 mkdir -p demo/Results/$lang/magnitudes/
 python3 convertMatrix.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
 mv demo/Results/$lang/processed/EQMatrix.txt demo/Results/$lang/processed/matrix.txt
+cp output/$lang/user.$lang.vec demo/Results/$lang/processed/
 pip install pymagnitude
 pip install gensim
 for filename in demo/Results/$lang/processed/*; do
