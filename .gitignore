@@ -44,3 +44,11 @@ code/BPR-ko.conf
 code/convertMatrix.py
 code/convertMatrix.py
 code/results.txt
+code/demo/
+code/demo/*
+code/all.devtest.oovs.tok.ko
+code/ko-en.dict.tok.norm.only_single_word_entries
+code/ko.vec
+code/ko.words
+code/results.txt
+code/results.txt
