@@ -46,6 +46,7 @@ paste -d' ' $lang-en.vector.en.words $lang-en.vector.en.scaled.vector > $lang-en
 # then, assemble the input and output embeddings for learning the mapping
 java -Dfile.encoding=UTF-8 -cp $path_to_code createTrainAndDevMapping $lang-en.vector.extended.words $lang-en.vector.extended.vector $lang-en.vector.en.words $lang-en.vector.en.scaled.vector $lang-dict-mturk.txt $lang 
 # finally, learn the mapping and project the target embeddings to the shared space
+echo "learn the mapping and project the target embeddings to the shared space"
 python $path_to_code/nnlinreg4xv.py --traininput $lang-input-train.txt --trainoutput $lang-output-train.txt --testinput $lang-input-test.txt --testoutput $lang-output-test.txt --verbose True --num_epochs 10000 --num_hidden 10000 --project $lang-en.vector.en.scaled --towrite $lang-en.vector.projected.vector
 
 echo "assemble final input files for BPR"
