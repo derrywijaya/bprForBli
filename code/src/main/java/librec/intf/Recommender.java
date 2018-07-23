@@ -353,22 +353,23 @@ public abstract class Recommender implements Runnable {
 		if (verbose)
 			Logs.debug("{}{} evaluate test data ... ", algoName, foldInfo);
 		String computation = cf.getString("computation");
+		
 		if (computation!=null && computation.equalsIgnoreCase("yes")) {
 			measures = computeScores();
 		} else {
-			measures = isRankingPred ? evalRankings() : evalRatings();
+			measures = isRankingPred ? evalRankings() : evalRatings();	
 		}
-		String measurements = getEvalInfo(measures);
+		
 		sw.stop();
 		long testTime = sw.elapsed(TimeUnit.MILLISECONDS) - trainTime;
 
 		// collecting results
 		measures.put(Measure.TrainTime, (double) trainTime);
 		measures.put(Measure.TestTime, (double) testTime);
-
+		String measurements = getEvalInfo(measures);
 		String evalInfo = algoName + foldInfo + ": " + measurements + "\tTime: "
 				+ Dates.parse(measures.get(Measure.TrainTime).longValue()) + ", "
-				+ Dates.parse(measures.get(Measure.TestTime).longValue());
+				+ Dates.parse(measures.get(Measure.TestTime).longValue());	
 		if (!isRankingPred)
 			evalInfo += "\tView: " + view;
 

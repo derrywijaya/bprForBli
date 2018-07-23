@@ -1,4 +1,6 @@
 #!/bin/sh
+# A script that is like run.sh but instead of printing BPR translations, it will print out BPR model matrices and
+# produce translations with Minh's fast magnitude translation
 # Take arguments: 2-letter language code of the foreign language, english embeddings, foreign embeddings, json bilingual dictionary, 
 # the list of foreign words to be translated (one word per line), and the current directory
 # ./run.sh ko en.vec ko.vec ko.json ko.words ./
@@ -98,20 +100,37 @@ echo "dataset.extended=./output/$lang/$lang.extended.norm" >> BPR-$lang.conf
 echo "dataset.tocompute=./output/$lang/$lang.totranslate.norm" >> BPR-$lang.conf
 echo "ratings.setup=-columns 0 1 -threshold 0" >> BPR-$lang.conf
 echo "mainlanguage=$lang" >> BPR-$lang.conf
-echo "recommender=BPRWEExtended" >> BPR-$lang.conf
+echo "recommender=BPRWEExtendedPrint" >> BPR-$lang.conf
 echo "evaluation.setup=test-set -f ./output/$lang/test-$lang.txt -p on --rand-seed 1 --test-view all" >> BPR-$lang.conf
 echo "item.ranking=on -topN -1 -ignore -1" >> BPR-$lang.conf
 echo "num.factors=20" >> BPR-$lang.conf
 echo "num.max.iter=100" >> BPR-$lang.conf
 echo "learn.rate=0.01 -max -1 -bold-driver" >> BPR-$lang.conf
 echo "reg.lambda=0.1 -u 0.1 -i 0.1 -b 0.1 -c 0.1" >> BPR-$lang.conf
-
-echo "the output of BPR will be stored in /demo/Results/$lang/translations.txt"
+echo "print=yes" >> BPR-$lang.conf
+echo "the matrices of BPR will be stored in /demo/Results/$lang/translations.txt"
 mkdir -p demo/Results/$lang/
 echo "output.setup=on -dir ./demo/Results/$lang/" >> BPR-$lang.conf
 
 echo "run BPR using the config file just created"
 MAVEN_OPTS="-Xmx150G" mvn exec:java -Dfile.encoding=UTF-8 -Dexec.mainClass=librec.main.LibRec -Dexec.args="-c BPR-$lang.conf"
 
-echo "write the output to the file /demo/Results/$lang/translations.txt"
-java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/BPRWEExtended-top-10-items-extended.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
+echo "matrices are written to /demo/Results/$lang/"
+mkdir -p demo/Results/$lang/matrices/
+mv demo/Results/$lang/*trix* demo/Results/$lang/matrices/
+mkdir -p demo/Results/$lang/magnitudes/
+python3 convertMatrix.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
+mv demo/Results/$lang/processed/EQMatrix.txt demo/Results/$lang/processed/matrix.txt
+pip install pymagnitude
+pip install gensim
+for filename in demo/Results/$lang/processed/*; do
+  filemag=`echo $filename | sed 's/.txt/.magnitude/g' `
+  filemag2=`echo $filemag | sed 's/processed/magnitudes/g' `
+  python -m pymagnitude.converter -i  $filename -o $filemag2 -a
+done
+mv demo/Results/$lang/magnitudes/matrix.magnitude demo/Results/$lang/magnitudes/EQMatrix.magnitude
+python3 -m pip install pymagnitude
+cp output/$lang/$lang.totranslate.norm demo/Results/$lang/
+python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
+java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/BPR_trans.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
+echo "resulting translations produced by magnitude is written to  demo/Results/$lang/translations.txt"

@@ -25,9 +25,11 @@ python 2.7, java, maven, tensorflow, numpy, math, sklearn, sed
 ```
 mvn install:install-file -Dfile=lib/happy.coding.utils-1.2.5.jar -DgroupId=happy.coding -DartifactId=utils -Dversion=1.2.5 -Dpackaging=jar
 ```
-3. Do a clean install: 
+3. Do a clean install, then clean and compile: 
 ```
 mvn clean install
+mvn clean
+mvn compile
 ```
 4. run `javac -cp lib/json-simple-1.1.1.jar:lib/happy.coding.utils-1.2.5.jar *java`
 5. Install the python dependencies 
@@ -37,6 +39,7 @@ source env/bin/activate
 pip install numpy
 pip install scipy
 pip install sklearn
+pip install --upgrade pip
 pip install tensorflow
 pip install pymagnitude
 pip install pandas
@@ -59,7 +62,7 @@ In addition the tarball contains the following files:
 * interlanguage.txt - the interlingual links from Wikipedia that is used to populate the matrix (used in the matrix completion using Wikipedia phase)
 * languagesdata - the foreign-english translations from our MTurk dictionary (used in the matrix completion using third languages phase that is linked to interlingual links from Wikipedia)
 * namedentitiesfromwiki-uniq.txt - list of named entities from Wikipedia (used in finding similarity of strings to get better named entities translation -- added after the paper, only works for Roman script languages)
-* wiki.en.top.words - top 100K english words from Wikipedia based on frequency (used to filter target English words -- this is the complete set of target English words -- if your target vocabulary is more than these top 100K, you can replace this file with your total English vocabulary file -- note the format it prepends ``row-'' and replaces ``,'' with ``_'')
+* wiki.en.top.words - top 100K english words from Wikipedia based on frequency (used to filter target English words -- this is the complete set of target English words -- if your target vocabulary is more than these top 100K, you can replace this file with your total English vocabulary file -- note the format it prepends `row-` and replaces `,` with `_`)
 
 
 To generate the embedding files (\*`.vec`) for a new language, you can use `gensim`: 
@@ -72,7 +75,12 @@ model.wv.save_word2vec_format(fileoutname)
 ```
 where `filename` is the file containing `sentence-separated`, `tokenized`, and `lower-cased` text (one sentence = one line). For example, we `sentence-split`, `tokenized`, and `lower-cased` Wikipedia English text to generate `en.vec` and Wikipedia Korean text to generate `ko.vec` (see [here](Wikipedia/README.md) for instructions to get text from Wikipedia and to sentence-split, tokenize, and lower-case it)
 
-7. Execute `run.sh` with 6 arguments: 
+7. Activate your virtual environment if not already activated 
+``
+source env/bin/activate
+``
+
+8. Execute `run.sh` with 6 arguments: 
 * 2-letter language code of the foreign language
 * English word embeddings file e.g., `en.vec`
 * Foreign word embeddings file e.g., `ko.vec`
@@ -82,21 +90,34 @@ where `filename` is the file containing `sentence-separated`, `tokenized`, and `
 ```
 ./run.sh ko en.vec ko.vec ko.json ko.words ./
 ```
+NOTE: If your bilingual dictionary is not on json format, you can run `runTab.sh` in the `code` directory instead with the same parameters. It takes bilingual dictionary that is in tab-separated format i.e., each line is `foreignWord` tab `englishWord`
+
 ## Translate words using Magnitude's Approximate kNN:
+
+If you want to produce translations fast, run `runWithMagnitude.sh` in the `code` directory instead of `run.sh` with the same parameters as `run.sh` (Similarly, if your bilingual dictionary is not of JSON format but is tab-separated, run `runTabWithMagnitude.sh` in the `code` directory instead).
+
+The details of what `runWithMagnitude.sh` contains are below:
+
 1. In the language's directory, create a sub-directory called 'matrices' and move all matrices of bilingual embeddings to this directory. Please find files with the following names: 'wikiPMatrix.txt', 'wikiQMatrix.txt', 'thirdTPMatrix.txt', 'thirdTQMatrix.txt', 'EMatrix.txt', 'extendedMatrix.txt'. Note that some languages won't have all six files.
 
 2. Create a directory that will later store embeddings in Magnitude format
 
 3. Run the following command to convert matrices to a format that Magnitude can process:
 ```bash
-python convertMatrix.py <language's dir> <Magnitude's dir>
-e.g python convertMatrix.py data/ko/ data/magnitude/ko/
+python3 convertMatrix.py <language's dir> <Magnitude's dir>
+e.g python3 convertMatrix.py demo/Results/ko/ demo/Results/ko/magnitudes/
 ```
-4. All converted matrices are stored in a sub-directory called 'processed'. Convert each matrix to Magnitude by running:
+4. Install gensim and [magnitude](https://github.com/plasticityai/magnitude) -- for both python2 and python3 if not yet installed:
+```
+pip install gensim
+pip install pymagnitude
+python3 -m pip install pymagnitude
+```
+5. All converted matrices are stored in a sub-directory called 'processed'. Convert each matrix to Magnitude by running:
 ```bash
 python -m pymagnitude.converter -i <input path> -o <output path> -a 
 ```
-5. Produce translation outputs by running:
+6. Produce translation outputs by running:
 ```bash
 python translate.py <language's dir> <Magnitude's dir>
 ```
@@ -136,5 +157,3 @@ If your default Java encoding is not UTF-8, append this to all commands involvin
 ```
 java -Dfile.encoding=UTF-8 
 ```
-
-The end.
