@@ -11,6 +11,7 @@ foreign=$3
 dictionary=$4
 foreignwords=$5
 path_to_code=$6
+translate_with=$7
 
 echo "process the embedding and word files to be in the format we require"
 export OLDLANG=$LANG
@@ -130,7 +131,9 @@ for filename in demo/Results/$lang/processed/*; do
 done
 mv demo/Results/$lang/magnitudes/matrix.magnitude demo/Results/$lang/magnitudes/EQMatrix.magnitude
 python3 -m pip install pymagnitude
+python -m pymagnitude.converter -i output/$lang/$lang-en.vector.projected -o demo/Results/$lang/magnitudes/$lang-en.vector.magnitude -a
+python -m pymagnitude.converter -i output/$lang/user.$lang.vec -o demo/Results/$lang/magnitudes/user.$lang.magnitude -a
 cp output/$lang/$lang.totranslate.norm demo/Results/$lang/
-python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/
+python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/ --vec $translate_with
 java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/BPR_trans.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
 echo "resulting translations produced by magnitude is written to  demo/Results/$lang/translations.txt"
