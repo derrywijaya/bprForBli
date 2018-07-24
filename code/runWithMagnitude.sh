@@ -140,7 +140,13 @@ cp output/$lang/$lang.totranslate.norm demo/Results/$lang/
 
 echo "translating using magnitude"
 rm -f demo/Results/$lang/BPR_trans.txt
-python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/ --vec $translate_with
-java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/BPR_trans.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
+rm -f demo/Results/$lang/monovec_trans.txt
 
+python3 translate.py demo/Results/$lang/ demo/Results/$lang/magnitudes/ --vec $translate_with
+if [ -e demo/Results/$lang/BPR_trans.txt ]
+then
+  java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/BPR_trans.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
+else
+  java -Dfile.encoding=UTF-8 -cp $path_to_code writeOutput demo/Results/$lang/monovec_trans.txt output/$lang/$lang.translated.norm > demo/Results/$lang/translations.txt
+fi
 echo "resulting translations produced by magnitude has been written to  demo/Results/$lang/translations.txt"
