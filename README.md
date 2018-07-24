@@ -94,7 +94,17 @@ NOTE: If your bilingual dictionary is not on json format, you can run `runTab.sh
 
 ## Translate words using Magnitude's Approximate kNN:
 
-If you want to produce translations fast, run `runWithMagnitude.sh` in the `code` directory instead of `run.sh` with the same parameters as `run.sh` (Similarly, if your bilingual dictionary is not of JSON format but is tab-separated, run `runTabWithMagnitude.sh` in the `code` directory instead).
+If you want to produce translations fast, run `runWithMagnitude.sh` in the `code` directory instead of `run.sh` (similarly, if your bilingual dictionary is not of JSON format but is tab-separated, run `runTabWithMagnitude.sh` in the `code` directory instead). Note the extra parameter for these scripts:
+
+To produce translations with the whole BPR pipeline using Magnitude's fast approximate kNN, run:
+```
+./runWithMagnitude.sh ko en.vec ko.vec ko.json ko.words ./ BPR
+```
+
+To produce translations with only our non-linear projection between the language spaces and Magnitude's fast approximate kNN, run:
+```
+./runWithMagnitude.sh ko en.vec ko.vec ko.json ko.words ./ monolingual
+```
 
 The details of what `runWithMagnitude.sh` contains are below:
 
