@@ -101,7 +101,7 @@ To produce translations with the whole BPR pipeline using Magnitude's fast appro
 ./runWithMagnitude.sh ko en.vec ko.vec ko.json ko.words ./ BPR
 ```
 
-To produce translations with only our non-linear projection between the language spaces and Magnitude's fast approximate kNN, run:
+To produce translations with only our non-linear mapping between the language spaces and Magnitude's fast approximate kNN, run:
 ```
 ./runWithMagnitude.sh ko en.vec ko.vec ko.json ko.words ./ monolingual
 ```
