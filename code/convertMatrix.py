@@ -33,7 +33,7 @@ def process_matrix(args):
     matrix_path = args.lang_dir + '/matrices/'
     # dump all processed matrices into one directory
     processed_path = args.lang_dir +'/processed/'
-    pathlib.Path(processed_path).mkdir(exist_ok=False) 
+    pathlib.Path(processed_path).mkdir(exist_ok=True) 
 
     matrices = os.listdir(matrix_path)
     for m in matrices:
