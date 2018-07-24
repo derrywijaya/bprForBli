@@ -41,7 +41,9 @@ def find_BPR_translations(args):
         foreign_ex = Magnitude(magnitude_path+'EQMatrix.magnitude')
     if 'user.'+lang+'.magnitude' in files: 
         foreign_mono = Magnitude(magnitude_path+'user.'+lang+'.magnitude')
-
+    if lang+'-en.vector.projected.magnitude' in files:
+        eng_proj = Magnitude(magnitude_path+lang+'-en.vector.projected.magnitude')
+        
     for i in range(foreign_words.shape[0]):
         word = foreign_words[i][0]
         wiki_trans, third_trans, ex_trans = [], [], []
@@ -77,7 +79,7 @@ def find_BPR_translations(args):
         # back off to monolingual vectors if word doesn't exist in any of previous 3 matrices 
         else:
             foreign_vec = foreign_mono.query(word)
-            trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
+            trans = eng_proj.most_similar_approx(foreign_vec, topn=10)
 
         line = ''
         line = str(i) + ': ' + foreign_words[i][0] + ': '
@@ -106,7 +108,8 @@ def find_monovec_translations(args):
     files = os.listdir(magnitude_path)
     
     if 'user.'+lang+'.magnitude' in files: 
-        eng_ex = Magnitude(magnitude_path+'EPMatrix.magnitude')
+        #eng_ex = Magnitude(magnitude_path+'EPMatrix.magnitude')
+        eng_proj=Magnitude(magnitude_path+lang+'-en.vector.projected.magnitude')
         foreign_ex = Magnitude(magnitude_path+'user.'+lang+'.magnitude')
     
     for i in range(foreign_words.shape[0]):
@@ -114,7 +117,8 @@ def find_monovec_translations(args):
         line = ''
         if word in foreign_ex:
             foreign_vec = foreign_ex.query(word)
-            trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
+            #trans = eng_ex.most_similar_approx(foreign_vec, topn=10)
+            trans = eng_proj.most_similar_approx(foreign_vec, topn=10)
 
             line = str(i) + ': ' + foreign_words[i][0] + ': '
             for j in range(len(trans)):
