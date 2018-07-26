@@ -36,10 +36,10 @@ mvn compile
 ```
 python -m virtualenv env
 source env/bin/activate
+pip install --upgrade pip
 pip install numpy
 pip install scipy
 pip install sklearn
-pip install --upgrade pip
 pip install tensorflow
 pip install pymagnitude
 pip install pandas
