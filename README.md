@@ -45,6 +45,7 @@ pip install pymagnitude
 pip install pandas
 pip install pathlib
 pip install lz4
+pip install xxhash
 ```
 6. Gather the required files:
 * English word embeddings, space separated, first line is the length and dimension, first column are words, all lower-cased
