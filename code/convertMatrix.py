@@ -22,7 +22,7 @@ def process_bias_vec(args):
     bias = pd.read_csv(args.lang_dir+'BVector.txt', sep=',', header=None).values
     # remove '[' and ']'
     bias[0][0] = float(bias[0][0][1:])
-    bias[0][99] = float(bias[0][99].split(']')[0])
+    bias[0][bias.shape[1]-1] = float(bias[0][bias.shape[1]-1].split(']')[0])
     return bias 
 
 def process_matrix(args):
